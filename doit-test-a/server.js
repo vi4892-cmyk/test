@@ -46,6 +46,15 @@ app.put('/todo/:id', (req, res) => {
   res.redirect('/');
 });
 
+// 할 일 삭제
+app.delete('/todo/:id', (req, res) => {
+  const id = Number(req.params.id);
+
+  todos = todos.filter((item) => item.id !== id);
+
+  res.redirect('/');
+});
+
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
 });
