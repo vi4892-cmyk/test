@@ -28,6 +28,23 @@ app.post('/todo', (req, res) => {
   res.redirect('/');
 });
 
+// 할 일 수정
+app.put('/todo/:id', (req, res) => {
+  const id = Number(req.params.id);
+  const text = (req.body.text || '').trim();
+
+  const todo = todos.find((item) => item.id === id);
+
+  if (!todo) {
+    return res.status(404).send('할 일을 찾을 수 없습니다.');
+  }
+
+  if (text) {
+    todo.text = text;
+  }
+
+  res.redirect('/');
+});
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}`);
